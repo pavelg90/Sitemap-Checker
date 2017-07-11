@@ -58,6 +58,10 @@ class Queue:
 
     def count(self):
     	return self.counter 
+	
+    def deleteThisFunction(now):
+	a = 1
+	return a
 
     def writer(self):
     	for write_this in self.items:
