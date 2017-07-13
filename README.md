@@ -9,5 +9,6 @@ Please remember to check that the starting URL is in fact the sitemaps of sitema
 ---------------------------------------------------------------------------------------------------------
 The product of this program is a csv for each section containing the following:
         Crawled URL | Status Code | Redirects | Comments
+        
         example.com | 200 \ 400   | [0,inf.)  | "didn't wrote the full URL because it has a comma"
 ---------------------------------------------------------------------------------------------------------
