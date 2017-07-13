@@ -1,5 +1,4 @@
 import multiprocessing
-from customQueue import Queue
 import requests
 import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
@@ -13,7 +12,6 @@ import sys
 #reload(sys)
 #sys.setdefaultencoding('utf-8')
 
-q = Queue()
 
 currentTime = " " + str(datetime.now()).replace("-", " ").replace(":", " ").replace(".", " ")
 start_time = time.time()
@@ -114,13 +112,12 @@ def checked_url_status(url):
 		urlList.append('')
 		urlList.append('')
 		urlList.append(comments)	
-	'''
+	
 	if int(urlList[1]) == 200 and int(urlList[2]) == 0:
 		return []
 	else:	
 		return urlList
-	'''
-	return urlList		
+			
 
 def make_name(url):
 	lastSlashIndex =  url.rfind("/") + 1
@@ -129,7 +126,6 @@ def make_name(url):
 
 
 def runSimulation(sectionList):
-	global q
 	urls_to_crawl = url_Retrieval(sectionList)
 	name_the_file = make_name(sectionList)
 	
@@ -137,21 +133,17 @@ def runSimulation(sectionList):
 		print url
 		write_this = checked_url_status(url)
 		if write_this != []:
-			#q.enqueue(write_this, name_the_file)
-			#print q.count()
 			csv_writer(write_this, name_the_file)
     	end_time = time.time()
 
 
 if __name__ == '__main__':
-    
-    batchSize = 2
     sectionList = temp_url_Retrieval('http://appsitemap.forexpros.com/tmp/xml/ru/sitemap.xml')
-    batch = []
 
-    
-    pool = multiprocessing.Pool(batchSize)
+    pool = multiprocessing.Pool(100)
+
     results = pool.map(runSimulation, sectionList)
+    
     time.sleep(2)
 		
 		    
