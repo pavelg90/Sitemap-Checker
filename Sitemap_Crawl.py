@@ -60,7 +60,8 @@ def tempSiteMap_urlConverter(url):
 
 def temp_url_Retrieval(url):
 	time.sleep(1.7)
-	response = requests.get(url, timeout = 20.0)
+	session = requests.Session()
+	response = sessions.get(url, timeout = 20.0)
 	statusCode = response.status_code
 	urlList = []
 	soup = BeautifulSoup(response.content, "html5lib", from_encoding="utf-8")
